@@ -13,6 +13,10 @@ class DioFactory {
       connectTimeout: Constant.connectTimeout,
       receiveTimeout: Constant.receiveTimeout,
       contentType: "application/json",
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
     );
     final Dio dio = Dio(options);
     dio.interceptors.addAll([

@@ -28,7 +28,7 @@ class HomeController extends GetxStateController{
   void onInit() {
     getUserInfo();
     items = [
-    {"title": "Update Information", "onPressed": () => Get.toNamed(AppRoutes.updateInformationPageRoute)},
+    {"title": "Update Information", "onPressed": () => Get.toNamed(AppRoutes.updateInformationPageRoute)?.then((value) => updateData(value))},
     {"title": "Change Password", "onPressed": () => null},
     {"title": "Delete Account", "onPressed": () => null},
     {"title": "Logout", "onPressed": () {
@@ -57,6 +57,11 @@ class HomeController extends GetxStateController{
     animatedListKey.currentState!.insertItem(options.length-1);
      (i++) == items.length-1? null : initialItem();
     });
+    }
+
+    updateData(User updatedUser){
+      user = updatedUser;
+      update(['home']);
     }
 
 }

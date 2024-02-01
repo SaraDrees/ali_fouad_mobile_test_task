@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
         fallbackLocale: const Locale('en', 'US'),
         debugShowCheckedModeBanner: false,
         theme: getApplicationTheme(),
-        // initialRoute: AppRoutes.loginPageRoute,
         getPages: _AppPages.appPages,
         initialBinding: AppInitialBindings(),
       );

@@ -18,7 +18,6 @@ class HomePage extends GetView<HomeController>{
       ),
       body: StateBuilder<HomeController>(
         id: 'home',
-        // initialWidgetState: WidgetState.loaded,
         disableState: true,
         builder: (widgetState, controller){
           return Stack(

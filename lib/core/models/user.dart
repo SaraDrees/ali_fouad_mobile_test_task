@@ -64,8 +64,8 @@ class User {
     data['country_code'] = countryCode;
     data['password_confirm'] = passwordConfirm;
     data['current_password'] = currentPassword;
-    data['toke'] = token;
-    data['token_expiry'] = tokenExpiry;
+    data['token'] = token;
+    data['token_expiry'] = tokenExpiry?.toIso8601String();
     data.removeWhere((key, value) => value == null);
     return data;
   }

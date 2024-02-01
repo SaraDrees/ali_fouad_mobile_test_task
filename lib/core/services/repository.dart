@@ -4,23 +4,23 @@ import 'package:ali_fouad_app/core/dio/dio_controller.dart';
 import 'package:ali_fouad_app/core/exceptions/exceptions.dart';
 import 'package:ali_fouad_app/core/models/user.dart';
 import 'package:ali_fouad_app/core/views/app_snackbar.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppRepository{
-  final Dio dio;
+  final di.Dio dio;
   final SharedPreferences sharedPreferences;
   AppRepository({required this.dio,required this.sharedPreferences });
 
    Future register(User user) async {
     try {
       final result = await dio.post("${DioController.baseUrl}/user/register",
-      data: user.toJson());
+      data: di.FormData.fromMap((user.toJson())));
       sharedPreferences.setString("userInfo", jsonEncode(result.data['data']));
     } catch (error) {
-      AppSnackBar.show(message: "${(error as DioException).message}",
+      AppSnackBar.show(message: "${(error as di.DioException).message}",
        title:"Register failed .. the app in test mode now", error: true);
       throw ExceptionHandler(error);
     }
@@ -29,10 +29,10 @@ class AppRepository{
   Future login(User user) async {
     try {
       final result = await dio.post("${DioController.baseUrl}/login",
-      queryParameters: user.toJson());
+      data: di.FormData.fromMap((user.toJson())));
       sharedPreferences.setString("userInfo", jsonEncode(result.data['data']));
     } catch (error) {
-      AppSnackBar.show(message: "${(error as DioException).message}",
+      AppSnackBar.show(message: "${(error as di.DioException).message}",
        title:"login failed .. the app in test mode now", error: true);
       throw ExceptionHandler(error);
     }
@@ -45,7 +45,7 @@ class AppRepository{
       debugPrint("$result");
       return userFromJson(result.data['data']) ;
     } catch (error) {
-      AppSnackBar.show(message: "${(error as DioException).message}",
+      AppSnackBar.show(message: "${(error as di.DioException).message}",
        title:"getUsers failed .. the app in test mode now", error: true);
       throw ExceptionHandler(error);
     }
@@ -56,7 +56,7 @@ class AppRepository{
       final result = await dio.get("${DioController.baseUrl}/user/$userId");
       return User.fromJson(result.data['data']);
     } catch (error) {
-      AppSnackBar.show(message: "${(error as DioException).message}",
+      AppSnackBar.show(message: "${(error as di.DioException).message}",
        title:"get User-Info failed .. the app in test mode now", error: true);
       throw ExceptionHandler(error);
     }
@@ -65,10 +65,10 @@ class AppRepository{
  Future updateUser(User user) async {
     try {
       await dio.post("${DioController.baseUrl}/user/update",
-      data: user.toJson());
+      data: di.FormData.fromMap((user.toJson())));
     } catch (error) {
       Get.back();
-      AppSnackBar.show(message: "${(error as DioException).message}", 
+      AppSnackBar.show(message: "${(error as di.DioException).message}", 
       title:"update Info failed .. the app in test mode now", error: true);
       throw ExceptionHandler(error);
     }
@@ -76,9 +76,9 @@ class AppRepository{
   Future changePassword(User user) async {
     try {
       await dio.post("${DioController.baseUrl}/user/changepassword",
-      data: user.toJson());
+      data: di.FormData.fromMap((user.toJson())));
     } catch (error) {
-      AppSnackBar.show(message: "${(error as DioException).message}", title:"the app in test mode now", error: true);
+      AppSnackBar.show(message: "${(error as di.DioException).message}", title:"the app in test mode now", error: true);
       throw ExceptionHandler(error);
     }
   }
@@ -87,7 +87,7 @@ class AppRepository{
       await dio.delete("${DioController.baseUrl}/user/delete",
       data: {});
     } catch (error) {
-      AppSnackBar.show(message: "${(error as DioException).message}", title:"the app in test mode now", error: true);
+      AppSnackBar.show(message: "${(error as di.DioException).message}", title:"the app in test mode now", error: true);
       throw ExceptionHandler(error);
     }
   }

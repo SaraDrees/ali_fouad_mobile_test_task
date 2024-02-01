@@ -42,7 +42,7 @@ class UpdateInformationController extends GetxStateController{
       final User data = User.fromJson(jsonDecode(sharedPreferences.get("userInfo").toString()) as Map<String,dynamic>);
       data.name = user?.name; data.email = user?.email; data.countryCode = user?.countryCode; data.phone = user?.phone;
       sharedPreferences.setString("userInfo", jsonEncode(data.toMap()));
-      Get.back();
+      Get.back(result: data);
       AppSnackBar.show(message: "Your information is updated successfully");
       return null;
     });

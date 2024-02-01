@@ -58,7 +58,6 @@ class StateBuilder<T extends GetxController> extends GetView<T> {
               return noResultView ?? const NoResultsWidget();
             case WidgetState.error:
               return errorView ?? const NoResultsWidget();
-            // NoInternetConnection(onRetryFunction: onRetryFunction);
             default:
               return builder(widgetState, controller);
           }

@@ -12,14 +12,6 @@ class AppInitialBindings extends Bindings {
     Get.put(
       DioFactory.dioSetUp(),
       permanent: true,
-    );
-    
+    ); 
   }
-  
-  //  getSharedPreferences() async{
-  //   final pref = await SharedPreferences.getInstance();
-  //   return pref;
-  // }
-
-
 }

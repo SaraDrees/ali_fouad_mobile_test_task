@@ -25,11 +25,7 @@ mixin RequestMixin on StateProvider {
       }
     } catch (e) {
       _errorHandler(ids: ids, requestType: requestType);
-      if (errorMessage != null) {
-        // CustomToast.showDefault(errorMessage.tr);
-      } else {
-        // CustomToast.showError(e.error);
-      }
+
     }
   }
 

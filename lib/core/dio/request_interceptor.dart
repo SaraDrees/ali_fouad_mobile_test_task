@@ -11,11 +11,6 @@ class RequestInterceptor extends Interceptor {
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     log("Hi RequestInterceptor");
-    options.headers["Access-Control-Allow-Origin"] = '*';
-    options.headers['Access-Control-Allow-Credentials'] = true;
-    options.headers['Access-Control-Allow-Headers'] =
-        "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale";
-    options.headers['Access-Control-Allow-Methods'] = '*'; 
      final value =  dioController.checkToken(options.uri.path);
       if (value != '') {
         options.headers['Authorization'] = 'Bearer $value';
